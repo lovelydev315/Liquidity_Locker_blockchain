@@ -7,6 +7,41 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         background: `${theme.custom.appbar} !important`,
     },
+    networkSelector: {
+        "&:hover": {
+            cursor: "pointer",
+        },
+    },
+    animatedText : {
+        textAlign:'center',
+    },
+    switchNetworkModal : {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    },
+    "@keyframes opacityOn": {
+        "0%" :{
+            opacity: 0,
+        },
+        "100%": {
+            opacity: 1,
+        }
+    },
+    "@keyframes opacityOff": {
+        "0%": {
+            opacity: 1,
+        },
+        "100%": {
+            opacity: 0,
+        }
+    },
     toolbar: {
         width: "100%",
         padding: theme.spacing(0, 6),
@@ -64,6 +99,14 @@ const useStyles = makeStyles((theme) => ({
                 backgroundColor: "#da012c",
             },
         },
+    },
+    btnHeader:{
+        padding:"10px 20px",
+        color:"white",
+        transition: "ease-in-out .3s",
+        '&:hover': {
+            color: "#e55370",
+         },
     },
     actionGroup: {
         display: "flex",

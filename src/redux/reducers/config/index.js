@@ -2,8 +2,7 @@ import { TOGGLEDARKMODE } from "../../constants";
 
 const Web3 = (
     state = {
-        // isDarkMode: eval(localStorage.getItem("isDarkMode"))
-        isDarkMode: true
+        isDarkMode: false
     },
     action
 ) => {

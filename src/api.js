@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { walletAddress } from './redux/reducers';
 
 const apiKey = 'SvMhtTsmQ239NmpwWjnnLWXtag5Jt8wYp7NF8F3Tear1QSaDRl9gnM34JZVXdLFV';
 const apiConfig = {

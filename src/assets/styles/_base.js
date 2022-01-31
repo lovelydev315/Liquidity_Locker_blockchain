@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
     },
     content: {
-        minHeight: "calc(100% - 176px)",
+        minHeight: "calc(100% - 152px)",
         overflow: "hidden",
     },
     mobileContent: {

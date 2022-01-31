@@ -4,6 +4,7 @@ import poolsStyles from "./_pools";
 import footerStyles from "./_footer";
 import poolStyles from "./_pool";
 import mobileStyles from "./_mobile";
+import dashboardStyles from './_dashboard';
 
 const useStyles = {
     header: headerStyles,
@@ -11,7 +12,8 @@ const useStyles = {
     pools: poolsStyles,
     footer: footerStyles,
     pool: poolStyles,
-    mobile: mobileStyles
+    mobile: mobileStyles,
+    dashboard: dashboardStyles
 };
 
 export default useStyles;

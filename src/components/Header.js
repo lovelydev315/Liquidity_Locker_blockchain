@@ -63,12 +63,6 @@ const Header = () => {
 
     const [tokenEl, setTokenEl] = React.useState(null);
     const isOpenTokenMenu = Boolean(tokenEl);
-    const handleClickTokenMenu = (event) => {
-        setTokenEl(event.currentTarget);
-    };
-    const handleCloseTokenMenu = () => {
-        setTokenEl(null);
-    };
 
     const [prices, setPrices] = useState({});
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -76,111 +70,8 @@ const Header = () => {
 
     const { isDarkMode } = useSelector((state) => state.config);
 
-    const toggleDarkMode = () => {
-        dispatch(theme_mode_store(!isDarkMode));
-    };
-
     const toggleDrawer = () => {
         setOpenDrawer(!openDrawer);
-    };
-
-    const updateTokenPrices = useCallback(async () => {
-        try {
-            let ids = null;
-            let prices = {};
-
-            const tokenList = config.tokens;
-
-            for (let i = 0; i < tokenList.length; i++) {
-                const id = tokenList[i];
-                ids = ids ? ids += `,${id}` : ids = id;
-            }
-            const price = await api.getCurrentPrice(ids, "usd");
-            for (let i in price) {
-                prices[i] = price[i].usd;
-            }
-            const price2string = JSON.stringify(prices);
-            localStorage.setItem("cached-token-prices-automatic", price2string);
-            return prices;
-        } catch (e) {
-            const cache = localStorage.getItem("cached-token-prices-automatic");
-            if (cache) {
-                const string2prices = JSON.parse(cache);
-                return string2prices;
-            } else {
-                return {}
-            }
-        }
-    }, [api]);
-
-    useEffect(() => {
-        let interval = null;
-        (async () => {
-            const prices = await updateTokenPrices();
-            setPrices(prices);
-        })();
-        interval = setInterval(async () => {
-            const prices = await updateTokenPrices();
-            setPrices(prices);
-        }, config.updateTime)
-        return () => {
-            clearInterval(interval);
-        }
-    }, []);
-
-    const at = () => {
-        if (window.ethereum) {
-            window.ethereum
-                .request({
-                    method: 'wallet_watchAsset',
-                    params: {
-                        type: 'ERC20', // Initially only supports ERC20, but eventually more!
-                        options: {
-                            address: config.aumi.address, // The address that the token is at.
-                            symbol: config.aumi.symbol, // A ticker symbol or shorthand, up to 5 chars.
-                            decimals: 18,
-                            image: config.aumi.img
-                        },
-                    },
-                });
-        }
-    }
-
-    const swn = () => {
-        if (window.ethereum) {
-            window.ethereum
-                .request({
-                    method: "wallet_addEthereumChain",
-                    params: [
-                        {
-                            chainId: `0x${config.netId.toString(16)}`,
-                            chainName: "Matic Network",
-                            rpcUrls: [
-                                "https://rpc-mainnet.maticvigil.com",
-                                "https://rpc-mainnet.matic.quiknode.pro",
-                                "https://matic-mainnet.chainstacklabs.com",
-                            ],
-                            nativeCurrency: {
-                                name: "MATIC",
-                                symbol: "MATIC",
-                                decimals: 18,
-                            },
-                            blockExplorerUrls: [
-                                "https://explorer-mainnet.maticvigil.com",
-                            ],
-                        },
-                    ],
-                })
-                .then(() => {
-                    alert(
-                        "You have successfully changed to Matic Network.",
-                        "info"
-                    );
-                })
-                .catch((error) => {
-                    alert(error.toString(), "error");
-                });
-        }
     };
 
     return (
@@ -296,20 +187,20 @@ const Header = () => {
                     </IconButton>
                 </Box>
             </Toolbar>
-            <Drawer
+            {/* <Drawer
                 open={openDrawer}
                 anchor="bottom"
                 className={classes.drawer}
                 onClose={() => toggleDrawer()}
             >
                 <List>
-                    <ListItem button onClick={swn}>
+                    <ListItem button >
                         <ListItemText>Matic Network</ListItemText>
                         <ListItemIcon>
                             <img width={28} src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1624446912" alt="Net" />
                         </ListItemIcon>
                     </ListItem>
-                    <ListItem button onClick={at}>
+                    <ListItem button >
                         <ListItemText>Add AUMI to your MetaMask
                         </ListItemText>
                         <ListItemIcon>
@@ -360,7 +251,7 @@ const Header = () => {
                         </Button>
                     </ListItem>
                 </List>
-            </Drawer>
+            </Drawer> */}
             <ConnectWallet
                 isOpen={openWalletList}
                 setIsOpen={setOpenWalletList}

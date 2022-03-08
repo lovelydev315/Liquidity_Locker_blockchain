@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    btnText: {
+        color:'#e55370',
+    },
     hide: {
         display: "none",
     },

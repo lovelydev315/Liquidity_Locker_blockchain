@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import config from "./config";
-import { STATISTICS, CHANGE_WALLET, TOKENDATA, USERBALANCE } from "../constants";
+import { STATISTICS, CHANGE_WALLET, TOKENDATA, USERBALANCE, TOKENLISTS } from "../constants";
+import { accordionActionsClasses } from "@mui/material";
 
 export function statistics(state = {}, action) {
     switch (action.type) {
@@ -42,11 +43,21 @@ export function userBalance(state=0, action) {
     }
 }
 
+export function tokenLists(state=[], action) {
+    switch(action.type) {
+        case TOKENLISTS:
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
     config,
     statistics,
     walletAddress,
     tokenData,
-    userBalance
+    userBalance,
+    tokenLists
 });
 export default rootReducer;

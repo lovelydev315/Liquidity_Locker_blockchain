@@ -63,7 +63,7 @@ const ConnectWallet = ({ isOpen, setIsOpen }) => {
         alert(`Copied to clipboard.`, "info");
     };
     const viewBlockUrl = (account) => {
-        window.open(`https://polygonscan.com/address/${account}`);
+        window.open(`https://snowtrace.com/address/${account}`);
     };
     // ** Effects
     useEffect(() => {

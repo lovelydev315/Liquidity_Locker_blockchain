@@ -10,9 +10,16 @@ const useStyles = makeStyles((theme) => ({
     networkImage:{
         height:'40px',
     },
+    cardHeader: {
+        backgroundColor:"#565656",
+    },
     networkTitle: {
         fontWeight:'bold',
         margin:0,
+    },
+    mobileStepper: {
+        marginTop:30,
+        backgroundColor:"transparent",
     },
     networkDes: {
         fontSize:12,

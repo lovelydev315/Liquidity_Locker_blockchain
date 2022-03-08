@@ -3,3 +3,4 @@ export const STATISTICS = "STATISTICS";
 export const CHANGE_WALLET = "CHANGE_WALLET";
 export const TOKENDATA = "TOKENDATA";
 export const USERBALANCE = "USERBALANCE";
+export const TOKENLISTS = 'TOKENLISTS';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 
 import clsx from "clsx";
 import { useWeb3React } from "@web3-react/core";
@@ -16,22 +16,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 
 // ** Import Redux
-import { theme_mode_store } from "../redux/actions/config";
-import { useSelector, useDispatch } from "react-redux";
 
 // ** Import Icons
-import NightsStayIcon from "@mui/icons-material/NightsStay";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import LiveHelpIcon from '@mui/icons-material/LiveHelp';
+import WifiProtectedSetupIcon from '@mui/icons-material/WifiProtectedSetup';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LockOutlined from "@mui/icons-material/LockOutlined";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import LaunchIcon from "@mui/icons-material/Launch";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 
 // ** Import Modules
 import { useHistory } from "react-router-dom";
@@ -39,37 +33,22 @@ import { useApi } from "../hooks";
 
 // ** Import Assets
 import useStyles from "../assets/styles";
-import Logo from "../assets/img/team.png";
+import Logo from "../assets/img/logo.png";
 
 // ** Import Components
 import ConnectWallet from "./ConnectWallet";
 import { ConnectedWallet } from "../assets/constants/wallets";
 
-import config from "../config/app";
-
 // ** Import
 const Header = () => {
     // ** Declare Maintainers
-    const api = useApi();
     const history = useHistory();
-    const dispatch = useDispatch();
     const classes = useStyles.header();
-    const isMobile = useMediaQuery("(max-width:600px)");
-    const isIPad = useMediaQuery("(max-width:1024px)");
-
+    const isMobile = useMediaQuery("(max-width:1100px)");
     const { account } = useWeb3React();
-
     const cWallet = ConnectedWallet();
-
-    const [tokenEl, setTokenEl] = React.useState(null);
-    const isOpenTokenMenu = Boolean(tokenEl);
-
-    const [prices, setPrices] = useState({});
     const [openDrawer, setOpenDrawer] = useState(false);
     const [openWalletList, setOpenWalletList] = useState(false);
-
-    const { isDarkMode } = useSelector((state) => state.config);
-
     const toggleDrawer = () => {
         setOpenDrawer(!openDrawer);
     };
@@ -78,60 +57,62 @@ const Header = () => {
         <AppBar position="sticky" className={classes.appbar}>
             <Toolbar className={classes.toolbar}>
                 <Link href="https://automatic.network" underline="none">
-                    <img className={classes.logo} style={{width:"100px"}} src={Logo} alt="logo" />
+                    <img className={classes.logo} src={Logo} alt="logo" />
                 </Link>
-                {/* <div
-                    className={clsx({
-                        [classes.hide]: isMobile,
-                    })}
-                    style={{ flex: 0.8 }}
-                />
-                <div
-                    className={clsx({
-                        [classes.hide]: isMobile,
-                    })}
-                    style={{ flex: 0.2 }}
-                /> */}
                 <Box className={classes.actionGroup}>
                     {
                         !isMobile && (
                             <>
-                                <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
-                                    <span
-                                        className={classes.btnHeader}
-                                    >
-                                        Explorer
-                                    </span>
-                                </Link>
-                                <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
-                                    <span
-                                        className={classes.btnHeader}
-                                    >
-                                        About
-                                    </span>
-                                </Link>
-                                <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
+                                <Link underline="none" href="/dashboard">
                                     <span
                                        className={classes.btnHeader}
                                     >
                                         Lockups
                                     </span>
                                 </Link>
-                                <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
+                                {/* <Link underline="none" >
+                                    <span
+                                        className={classes.btnHeader}
+                                    >
+                                        Explorer
+                                    </span>
+                                </Link>
+                                <Link underline="none" >
+                                    <span
+                                        className={classes.btnHeader}
+                                    >
+                                        About
+                                    </span>
+                                </Link>
+                                
+                                <Link underline="none" >
                                     <span
                                         className={classes.btnHeader}
                                     >
                                         Mint
                                     </span>
-                                </Link>
-                                <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
+                                </Link> */}
+                                {/* <Link underline="none" href="/vesting">
                                     <span
                                         className={classes.btnHeader}
                                     >
                                         Vesting
                                     </span>
                                 </Link>
-                                
+                                <Link underline="none" href="/claim">
+                                    <span
+                                        className={classes.btnHeader}
+                                    >
+                                        Claim Token
+                                    </span>
+                                </Link>
+                                <Link underline="none" href="/airdrop">
+                                    <span
+                                        className={classes.btnHeader}
+                                    >
+                                        Airdrop
+                                    </span>
+                                </Link> */}
                             </>
                         )
                     }
@@ -169,13 +150,6 @@ const Header = () => {
                             }
                         })()}
                     </Box>
-                    {/* <IconButton
-                        color="inherit"
-                        onClick={() => toggleDarkMode()}
-                        className={classes.darkModeButton}
-                    >
-                        {isDarkMode ? <NightsStayIcon /> : <WbSunnyIcon />}
-                    </IconButton> */}
                     <IconButton
                         color="inherit"
                         onClick={() => toggleDrawer()}
@@ -187,48 +161,59 @@ const Header = () => {
                     </IconButton>
                 </Box>
             </Toolbar>
-            {/* <Drawer
+            <Drawer
                 open={openDrawer}
                 anchor="bottom"
                 className={classes.drawer}
                 onClose={() => toggleDrawer()}
             >
                 <List>
-                    <ListItem button >
-                        <ListItemText>Matic Network</ListItemText>
-                        <ListItemIcon>
-                            <img width={28} src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1624446912" alt="Net" />
-                        </ListItemIcon>
-                    </ListItem>
-                    <ListItem button >
-                        <ListItemText>Add AUMI to your MetaMask
-                        </ListItemText>
-                        <ListItemIcon>
-                            <img width={28} src={config.aumi.img} alt="Token" />
-                        </ListItemIcon>
-                    </ListItem>
-                    <Link underline="none" target="_blank" href="https://quickswap.exchange/#/swap?outputCurrency=0x3eB177A6693eC81d1E170136f8AD02fffBE172a7">
+                    <Link underline="none"  href="/dashboard">
                         <ListItem button>
-                            <ListItemText>Buy Token</ListItemText>
+                            <ListItemText>LockUps</ListItemText>
                             <ListItemIcon>
-                                <ShoppingCartRoundedIcon />
+                                <LockOutlined />
                             </ListItemIcon>
                         </ListItem>
                     </Link>
-                    <Link underline="none" target="_blank" href="https://dory-pilkunnussija.gitbook.io/automatic-whitepaper/">
-                        <ListItem button>
-                            <ListItemText>Docs</ListItemText>
+                    <Link underline="none" >
+                        <ListItem button >
+                            <ListItemText>Explorer</ListItemText>
                             <ListItemIcon>
                                 <LaunchIcon />
                             </ListItemIcon>
                         </ListItem>
                     </Link>
-                    <ListItem button onClick={() => history.push("/pools")}>
-                        <ListItemText>Pools</ListItemText>
+                    <ListItem button >
+                        <ListItemText>About</ListItemText>
                         <ListItemIcon>
-                            <LaunchIcon />
+                            <LiveHelpIcon/>
                         </ListItemIcon>
                     </ListItem>
+                    <Link underline="none" >
+                        <ListItem button>
+                            <ListItemText>Mint</ListItemText>
+                            <ListItemIcon>
+                                <AttachMoneyIcon />
+                            </ListItemIcon>
+                        </ListItem>
+                    </Link>
+                    <Link underline="none"  href="/vesting">
+                        <ListItem button >
+                            <ListItemText>Vesting</ListItemText>
+                            <ListItemIcon>
+                                <WifiProtectedSetupIcon />
+                            </ListItemIcon>
+                        </ListItem>
+                    </Link>
+                    <Link underline="none"  href="/claim">
+                        <ListItem button >
+                            <ListItemText>Claim Token</ListItemText>
+                            <ListItemIcon>
+                                <WifiProtectedSetupIcon />
+                            </ListItemIcon>
+                        </ListItem>
+                    </Link>
                     <ListItem>
                         <Button
                             variant="contained"
@@ -251,7 +236,7 @@ const Header = () => {
                         </Button>
                     </ListItem>
                 </List>
-            </Drawer> */}
+            </Drawer>
             <ConnectWallet
                 isOpen={openWalletList}
                 setIsOpen={setOpenWalletList}

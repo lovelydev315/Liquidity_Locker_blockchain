@@ -92,7 +92,7 @@ const Header = () => {
                                         Mint
                                     </span>
                                 </Link> */}
-                                {/* <Link underline="none" href="/vesting">
+                                <Link underline="none" href="/vesting">
                                     <span
                                         className={classes.btnHeader}
                                     >
@@ -112,7 +112,7 @@ const Header = () => {
                                     >
                                         Airdrop
                                     </span>
-                                </Link> */}
+                                </Link>
                             </>
                         )
                     }
